@@ -6,14 +6,9 @@
 +---baekjoon
 |   |  README.md
 |   |   \---solution(풀이)
-\---programmers
-    +---Level
-    | README.md
-    |   \---solution(풀이)
 ```
 
 ### :pencil2: 문제 풀이
-- 프로그래머스([문제풀이](./programmers/))
 - 백준([문제풀이](./baekjoon/))
 
 #### 알고리즘 사이트
