@@ -1,2 +1,26 @@
-# Algorithm
-알고리즘 문제풀이
+# Algorithm Solving
+> 풀었던 알고리즘 문제를 기록하고 정리한 저장소
+
+### :open_file_folder: 폴더 구조
+```bash
++---baekjoon
+|   |  README.md
+|   |   \---solution(풀이)
+\---programmers
+    +---Level
+    | README.md
+    |   \---solution(풀이)
+```
+
+### :pencil2: 문제 풀이
+- 프로그래머스([문제풀이](./programmers/))
+- 백준([문제풀이](./baekjoon/))
+
+#### 알고리즘 사이트
+- [백준 온라인 저지](https://www.acmicpc.net)
+- [프로그래머스](https://programmers.co.kr/)
+- [SW Expert Academy](https://swexpertacademy.com/main/main.do)
+- [코드업](https://codeup.kr/index.php)
+- [LeetCode](https://leetcode.com/)
+- [CodeWars](https://www.codewars.com/)
+- [HackerRank](https://www.hackerrank.com/)
