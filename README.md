@@ -3,9 +3,12 @@
 
 ### :open_file_folder: 폴더 구조
 ```bash
-+---baekjoon
++---백준
 |   |  README.md
-|   |   \---solution(풀이)
+|   |   \---level
+|   |   |   \---problem_num. title
+|   |   |   |   \---problem(README.md)
+|   |   |   |   \---solution(title.cc, problem_num.md)
 ```
 
 ### :pencil2: 문제 풀이
