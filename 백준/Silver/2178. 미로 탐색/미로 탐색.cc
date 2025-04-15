@@ -1,13 +1,13 @@
 #include <iostream>
+#include <vector>
 #include <queue>
-#include <map>
 using namespace std;
 
-int N, M;
-int adj[100][100];
-int visited[100][100];
-int dy[] = { -1,1,0,0 };
-int dx[] = { 0,0,-1,1 };
+int n, m;
+vector<int> adj[101];
+int visited[101][101];
+int dy[4] = { -1,1,0,0 };
+int dx[4] = { 0,0,-1,1 };
 
 void bfs(int y, int x)
 {
@@ -15,27 +15,25 @@ void bfs(int y, int x)
 	visited[y][x] = 1;
 	q.push({ y,x });
 
-	while (!q.empty())
+	while (q.size())
 	{
-		int a, b;
-		tie(a, b) = q.front();
+		pair<int, int> k = q.front();
 		q.pop();
 
 		for (int i = 0; i < 4; i++)
 		{
-			int ny = a + dy[i];
-			int nx = b + dx[i];
-
-			if (ny < 0 || nx < 0 || ny >= N || nx >= M) continue;
-			if (visited[ny][nx]) continue;
+			int ny = k.first + dy[i];
+			int nx = k.second + dx[i];
+			if (ny < 0 || ny >= n || nx < 0 || nx >= m) continue;
 			if (!adj[ny][nx]) continue;
-
-			visited[ny][nx] = visited[a][b] + 1;
+			if (visited[ny][nx]) continue;
+			
+			visited[ny][nx] = visited[k.first][k.second] + 1;
 			q.push({ ny,nx });
 		}
 	}
 
-	cout << visited[N - 1][M - 1];
+	cout << visited[n - 1][m - 1];
 }
 
 int main()
@@ -44,16 +42,17 @@ int main()
 	cin.tie(0);
 	cout.tie(0);
 
-	cin >> N >> M;
-	for (int i = 0; i < N; i++)
+	cin >> n >> m;
+	for (int i = 0; i < n; i++)
 	{
 		string temp;
 		cin >> temp;
-		for (int j = 0; j < M; j++)
+		for (int j = 0; j < m; j++)
 		{
-			adj[i][j] = (int)(temp[j] - '0');
+			adj[i].push_back((int)(temp[j] - '0'));
 		}
 	}
+
 	bfs(0, 0);
 
 	return 0;
