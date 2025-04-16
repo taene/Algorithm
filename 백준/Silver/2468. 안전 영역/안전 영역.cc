@@ -1,7 +1,8 @@
 #include <iostream>
 using namespace std;
 
-int n, height, ret, cnt;
+int n, height, cnt;
+int ret = 1; // 아무 지역도 물에 안 잠겼을 때
 int adj[100][100];
 bool visited[100][100];
 int dy[4] = { -1,1,0,0 };
@@ -42,7 +43,7 @@ int main()
 		}
 	}
 
-	while (height--)
+	while (height)
 	{
 		fill(&visited[0][0], &visited[0][0] + 100 * 100, 0);
 		cnt = 0;
@@ -59,6 +60,7 @@ int main()
 			}
 		}
 		ret = max(ret, cnt);
+		height--;
 	}
 	cout << ret;
 
