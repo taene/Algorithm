@@ -5,13 +5,16 @@
 using namespace std;
 
 int n, c;
-map<int, pair<int, int>> mp;	// key, {count, index}
+map<int, int> mp_cnt;
+map<int, int> mp_idx;
+vector<pair<int, int>> ret;
 
-bool cmp(pair<int, pair<int, int>>& a, pair<int, pair<int, int>>& b)
+bool cmp(pair<int, int> a, pair<int, int> b)
 {
-	if (a.second.first == b.second.first)
-		return a.second.second < b.second.second;
-	return a.second.first > b.second.first;
+	if (a.second == b.second)
+		return mp_idx[a.first] < mp_idx[b.first];
+	else
+		return a.second > b.second;
 }
 
 int main()
@@ -21,29 +24,28 @@ int main()
 	cout.tie(0);
 
 	cin >> n >> c;
+	
 	for (int i = 0; i < n; i++)
 	{
 		int temp;
 		cin >> temp;
-		if (mp.find(temp) != mp.end())
-		{
-			mp[temp].first++;
-		}
-		else
-			mp.insert({ temp,{1,i} });
+		mp_cnt[temp]++;
+
+		if (mp_idx.find(temp) == mp_idx.end())
+			mp_idx[temp] = i;
 	}
 
-	vector<pair<int, pair<int, int>>> v(mp.begin(), mp.end());
-
-	sort(v.begin(), v.end(), cmp);
-
-	for (auto it : v)
+	for (auto it : mp_cnt)
 	{
-		int cnt = it.second.first;
-		while (cnt--)
-		{
+		ret.push_back({ it.first, it.second });
+	}
+
+	sort(ret.begin(), ret.end(), cmp);
+
+	for (auto it : ret)
+	{
+		for (int i = 0; i < it.second; i++)
 			cout << it.first << ' ';
-		}
 	}
 
 	return 0;
