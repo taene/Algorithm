@@ -1,95 +1,51 @@
 #include <iostream>
 #include <string>
-#include <stack>
 using namespace std;
 
-int n, teamNum;
-string goalTime;
-stack<pair<int, int>> timer;
-int teamWinTime[3];
-pair<int, int> inputGoalTime;
+int n, o, A, B, aSum, bSum;
+string s, previous;
 
-int switchTimeStringToInt(string s)
+string print(int a) 
 {
-	string a = s.substr(0, s.find(":"));
-	string b = s.substr(s.find(":") + 1);
-
-	int min = stoi(a);
-	int sec = stoi(b);
-
-	int timer = min * 60 + sec;
-
-	return timer;
+    string d = "00" + to_string(a / 60);
+    string e = "00" + to_string(a % 60);
+    return d.substr(d.size() - 2, 2) + ":" + e.substr(e.size() - 2, 2);
 }
 
-string switchTimeIntToString(int timer)
+int changeToInt(string a) 
 {
-	string s;
-	
-	int min = timer / 60;
-	int sec = timer % 60;
-
-	if (min >= 0 && min < 10)
-		s += "0" + to_string(min) + ":";
-	else
-		s += to_string(min) + ":";
-
-	if (sec >= 0 && sec < 10)
-		s += "0" + to_string(sec);
-	else
-		s += to_string(sec);
-
-	return s;
+    return atoi(a.substr(0, 2).c_str()) * 60 + atoi(a.substr(3, 2).c_str());
 }
 
-int main()
+void go(int& sum, string s) 
 {
-	ios::sync_with_stdio(false);
-	cin.tie(0);
-	cout.tie(0);
+    sum += (changeToInt(s) - changeToInt(previous));
+}
 
-	cin >> n;
+int main() 
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL); cout.tie(NULL);
+    cin >> n;
+    for (int i = 0; i < n; i++) 
+    {
+        cin >> o >> s;
 
-	while (n--)
-	{
-		cin >> teamNum;
-		cin >> goalTime;
+        if (A > B)
+            go(aSum, s);
+        else if (B > A)
+            go(bSum, s);
 
-		int t = switchTimeStringToInt(goalTime);
+        o == 1 ? A++ : B++;
 
-		inputGoalTime = { teamNum,t };
-		pair<int, int> winTeamTime;
+        previous = s;
+    }
 
-		if (!timer.empty())
-		{
-			winTeamTime = timer.top();
-			if (inputGoalTime.first != timer.top().first)
-				timer.pop();
-			else
-				timer.push(inputGoalTime);
-		}
-		else
-			timer.push(inputGoalTime);
+    if (A > B)
+        go(aSum, "48:00");
+    else if (B > A)
+        go(bSum, "48:00");
 
-		if (timer.empty())
-		{
-			teamWinTime[winTeamTime.first] += inputGoalTime.second - winTeamTime.second;
-		}
-	}
-
-	if (!timer.empty())
-	{
-		while (timer.size() > 1)
-		{
-			timer.pop();
-		}
-
-		teamWinTime[timer.top().first] += 48 * 60 - timer.top().second;
-	}
-
-	string ret1 = switchTimeIntToString(teamWinTime[1]);
-	string ret2 = switchTimeIntToString(teamWinTime[2]);
-	cout << ret1 << '\n' << ret2;
-
-	return 0;
+    cout << print(aSum) << "\n";
+    cout << print(bSum) << "\n";
 }
