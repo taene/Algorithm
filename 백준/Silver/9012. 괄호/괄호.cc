@@ -1,0 +1,44 @@
+#include <iostream>
+#include <stack>
+#include <algorithm>
+
+using namespace std;
+
+bool cmp(stack<int> &st, string &a)
+{
+	for (int i = 0; i < a.length(); i++)
+	{
+		if (st.empty() && a[i] == ')')
+			return false;
+		else if (a[i] == '(')
+			st.push(a[i]);
+		else if (a[i] == ')')
+			st.pop();
+	}
+	if (st.empty() == true)
+		return true;
+	else
+		return false;
+}
+
+int main() 
+{
+	ios::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
+
+	int T;
+	cin >> T;
+
+	while (T--)
+	{
+		stack<int> st;
+		string a;
+		cin >> a;
+
+		if (cmp(st, a) == true)
+			cout << "YES" << "\n";
+		else
+			cout << "NO" << "\n";
+	}
+}
