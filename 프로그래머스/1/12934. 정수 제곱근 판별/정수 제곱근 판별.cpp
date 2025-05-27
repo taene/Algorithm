@@ -8,7 +8,6 @@ long long solution(long long n) {
     long long answer = 0;
     
     int k = sqrt(n);
-    if(pow(k,2)==n) return pow(k+1,2);
+    if((long long)k*k==n) return (long long)(k+1)*(k+1);
     else return -1;
-    
 }
