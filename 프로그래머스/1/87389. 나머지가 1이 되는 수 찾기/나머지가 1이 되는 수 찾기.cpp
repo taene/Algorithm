@@ -7,20 +7,12 @@ int solution(int n) {
     int answer = 0;
     
     int i=3;
-    while(true)
+    if(n&1) return 2;
+    else
     {
-        if(n%2==1)
+        while(true)
         {
-            answer = 2;
-            return answer;
-        }
-        else
-        {
-            if(n%i==1)
-            {
-                answer=i;
-                return answer;
-            }
+            if(n%i==1) return i;
             i++;
         }
     }
