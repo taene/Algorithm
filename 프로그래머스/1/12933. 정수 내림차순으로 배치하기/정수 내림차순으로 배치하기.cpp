@@ -8,7 +8,7 @@ vector<int> v;
 
 int cmp(int a, int b)
 {
-    return a >= b;
+    return a > b;
 }
 
 long long solution(long long n) {
@@ -27,7 +27,7 @@ long long solution(long long n) {
     {
         k+=to_string(i);
     }
-    answer = stol(k);
+    answer = stoll(k);
     
     return answer;
 }
