@@ -6,27 +6,5 @@ using namespace std;
 long long solution(int a, int b) {
     long long answer = 0;
     
-    if(a==b)
-    {
-        return a;
-    }
-    else if(a<b)
-    {
-        while(a<=b)
-        {
-            answer+=a;
-            a++;
-        }
-    }
-    else
-    {
-        // a>b
-        while(b<=a)
-        {
-            answer+=b;
-            b++;
-        }
-    }
-    
-    return answer;
+    return a == b ? static_cast<long long>(a) : (max(b-a, a-b) + 1) * (static_cast<long long>(a) + b) / 2;
 }
