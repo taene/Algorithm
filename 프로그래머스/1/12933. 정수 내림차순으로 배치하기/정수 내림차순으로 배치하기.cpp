@@ -4,29 +4,11 @@
 
 using namespace std;
 
-vector<int> v;
-
-int cmp(int a, int b)
-{
-    return a > b;
-}
-
 long long solution(long long n) {
     long long answer = 0;
     
-    do
-    {
-        v.push_back(n%10);
-        n/=10;
-    } while(n);
-    
-    sort(v.begin(),v.end(),cmp);
-    
-    string k;
-    for(int i:v)
-    {
-        k+=to_string(i);
-    }
+    string k = to_string(n);
+    sort(k.begin(), k.end(), greater<char>());
     answer = stoll(k);
     
     return answer;
