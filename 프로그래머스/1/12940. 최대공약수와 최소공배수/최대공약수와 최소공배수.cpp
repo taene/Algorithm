@@ -3,35 +3,21 @@
 
 using namespace std;
 
-int ret1(int n, int m)
+int gcd(int a, int b)
 {
-    if(n>m)
-    {
-        int temp;
-        temp=n;
-        n=m;
-        m=temp;
-    }
-    
-    int ret = 0;
-    for(int i=1; i<=n; i++)
-    {
-        if(n%i==0 && m%i==0) ret = i;
-    }
-    return ret;
+    return a ? gcd(b%a, a) : b;
 }
 
-int ret2(int n, int m, int mx)
+int lcm(int a, int b)
 {
-    n/=mx;
-    m/=mx;
-    return n*m*mx;
+    return (a*b)/gcd(a,b);
 }
 
 vector<int> solution(int n, int m) {
     vector<int> answer;
-    int mx = ret1(n,m);
-    answer.push_back(mx);
-    answer.push_back(ret2(n,m,mx));
+    
+    answer.push_back(gcd(n,m));
+    answer.push_back(lcm(n,m));
+    
     return answer;
 }
