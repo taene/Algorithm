@@ -4,8 +4,8 @@
 
 using namespace std;
 
-long long solution(string s) {
-    long long answer = 0;
+int solution(string s) {
+    int answer = 0;
     string t="";
     
     vector<string> num = {"zero","one","two","three","four","five","six","seven","eight","nine"};
@@ -14,8 +14,7 @@ long long solution(string s) {
     {
         if(s[i]>='0'&&s[i]<='9')
         {
-            answer+=static_cast<int>(s[i]-'0');
-            answer*=10;
+            answer = answer*10 + static_cast<int>(s[i]-'0');
         }
         else
         {
@@ -24,14 +23,12 @@ long long solution(string s) {
             {
                 if(t == num[j])
                 {
-                    answer+=j;
-                    answer*=10;
+                    answer= answer*10+j;
                     t="";
                 }
             }
         }
     }
-    answer/=10;
     
     return answer;
 }
