@@ -8,17 +8,7 @@ long long solution(string s) {
     long long answer = 0;
     string t="";
     
-    vector<string> num;
-    num.push_back("zero");
-    num.push_back("one");
-    num.push_back("two");
-    num.push_back("three");
-    num.push_back("four");
-    num.push_back("five");
-    num.push_back("six");
-    num.push_back("seven");
-    num.push_back("eight");
-    num.push_back("nine");
+    vector<string> num = {"zero","one","two","three","four","five","six","seven","eight","nine"};
     
     for(int i=0; i<s.size(); i++)
     {
