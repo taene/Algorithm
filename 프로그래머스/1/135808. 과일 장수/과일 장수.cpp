@@ -1,24 +1,16 @@
 #include <string>
 #include <vector>
+#include <algorithm>
 
 using namespace std;
 
 int solution(int k, int m, vector<int> score) {
     int answer = 0;
-    vector<int> countNum(10,0);
+    sort(score.begin(), score.end(), greater<>());
     
-    for(auto& i:score)
+    for(int i=1; i<=score.size()/m; i++)
     {
-        countNum[i]++;
-    }
-    
-    for(int i=countNum.size()-1; i>0; i--)
-    {
-        if(countNum[i]!=0)
-        {
-            answer += i * m * (countNum[i]/m);
-            countNum[i-1] += countNum[i] % m;
-        }
+        answer += score[i*m-1] * m;
     }
     
     return answer;
