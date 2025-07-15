@@ -27,14 +27,12 @@ vector<int> solution(vector<string> keymap, vector<string> targets) {
         {
             if(alphabets[targets[i][j]-'A'] == 0)
             {
-                answer.push_back(-1);
-                counting = 0;
+                counting = -1;
                 break;
             }
             counting+=alphabets[targets[i][j]-'A'];
         }
-        if(counting!=0)
-            answer.push_back(counting);
+        answer.push_back(counting);
     }
     
     return answer;
