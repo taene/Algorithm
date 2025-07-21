@@ -3,38 +3,26 @@
 
 using namespace std;
 
-int solution(vector<int> ingredient) {
+int solution(vector<int> ingredient)
+{
     int answer = 0;
-    vector<int> ret = {1,2,3,1};
-    vector<int> stacks;
-    bool correct = false;
-    
-    for(int temp : ingredient)
+    vector<int> stack; // 변수명을 더 명확하게 변경
+
+    for (int igd : ingredient)
     {
-        stacks.push_back(temp);
-        
-        if(stacks.size()>=4)
+        stack.push_back(igd);
+
+        if (stack.size() >= 4)
         {
-            for(int i=0; i<ret.size(); i++)
-            {
-                if(stacks[stacks.size()-ret.size()+i]==ret[i])
-                {
-                    correct=true;
-                }
-                else
-                {
-                    correct=false;
-                    break;
-                }
-            }
-            
-            if(correct)
+            if (stack[stack.size() - 4] == 1 &&
+                stack[stack.size() - 3] == 2 &&
+                stack[stack.size() - 2] == 3 &&
+                stack[stack.size() - 1] == 1)
             {
                 answer++;
-                for(int i=0; i<ret.size(); i++)
-                {
-                    stacks.pop_back();
-                }
+                
+                for(int i=0; i<4; i++)
+                    stack.pop_back();
             }
         }
     }
