@@ -6,7 +6,7 @@ using namespace std;
 int solution(vector<int> ingredient)
 {
     int answer = 0;
-    vector<int> stack; // 변수명을 더 명확하게 변경
+    vector<int> stack;
 
     for (int igd : ingredient)
     {
@@ -21,7 +21,7 @@ int solution(vector<int> ingredient)
             {
                 answer++;
                 
-                for(int i=0; i<4; i++)
+                for(int i = 0; i < 4; i++)
                     stack.pop_back();
             }
         }
