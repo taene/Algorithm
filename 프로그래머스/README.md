@@ -76,7 +76,7 @@
 - [홀짝 비트연산](./1/12937. 짝수와 홀수/홀짝비트연산.md)
 - [C++ style cast VS C style cast](./1/12934. 정수 제곱근 판별/C++styleCast와CstyleCast.md)
 - [최대공약수와 최소공배수 최적화](./1/12940. 최대공약수와 최소공배수/최대공약수와 최소공배수.cpp)
-- [split()](./1/12930. 이상한 문자 만들기/string split().md)
+- [split()](https://github.com/taene/Algorithm/blob/a0c7bbaeea8041ae046510455862e337ba766c7e/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4/1/12930.%E2%80%85%EC%9D%B4%EC%83%81%ED%95%9C%E2%80%85%EB%AC%B8%EC%9E%90%E2%80%85%EB%A7%8C%EB%93%A4%EA%B8%B0/string%20split().md)
 - [순열조합](./1/131705. 삼총사/순열조합.md)
 - [sort() 사용자 정의 함수](./1/12915. 문자열 내 마음대로 정렬하기/문자열 내 마음대로 정렬하기.cpp)
 - [힙 Heap](./1/138477. 명예의 전당 （1）/힙Heap.md)
