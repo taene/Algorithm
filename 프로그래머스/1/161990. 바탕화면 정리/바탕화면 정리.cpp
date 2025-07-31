@@ -1,40 +1,27 @@
 #include <string>
 #include <vector>
+#include <algorithm>
 
 using namespace std;
 
-vector<int> solution(vector<string> wallpaper) {
-    vector<int> answer;
-    
-    pair<int,int> mn = {51,51};
-    pair<int,int> mx = {0,0};
-    
-    for(int i=0; i<wallpaper.size(); i++)
+vector<int> solution(vector<string> wallpaper) 
+{
+    int lux = 51, luy = 51;
+    int rdx = -1, rdy = -1;
+
+    for (int i = 0; i < wallpaper.size(); i++)
     {
-        for(int j=0; j<wallpaper[i].size(); j++)
+        for (int j = 0; j < wallpaper[i].size(); j++)
         {
-            if(wallpaper[i][j]=='#')
+            if (wallpaper[i][j] == '#')
             {
-                if(mn.first > i)
-                    mn.first = i;
-                
-                if(mn.second > j)
-                    mn.second = j;
-                
-                if(mx.first < i)
-                    mx.first = i;
-                
-                if(mx.second < j)
-                    mx.second = j;
+                lux = min(lux, i);
+                luy = min(luy, j);
+                rdx = max(rdx, i);
+                rdy = max(rdy, j);
             }
         }
     }
-    
-    answer.push_back(mn.first);
-    answer.push_back(mn.second);
-    answer.push_back(mx.first+1);
-    answer.push_back(mx.second+1);
-    
-    
-    return answer;
+
+    return {lux, luy, rdx + 1, rdy + 1};
 }
