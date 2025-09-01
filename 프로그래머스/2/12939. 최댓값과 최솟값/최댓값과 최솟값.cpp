@@ -6,25 +6,27 @@ using namespace std;
 
 string solution(string s) {
     string answer = "";
-    
-    vector<int> v;
-    string temp;
-    for(int i=0; i<s.length(); i++)
+    string temp = "";
+    vector<int> sortInt;
+    for(char& idx : s)
     {
-        if(s[i]!=' ')
+        if(idx != ' ')
         {
-            temp+=s[i];
+            temp += idx;
         }
         else
         {
-            v.push_back(stoi(temp));
+            sortInt.push_back(stoi(temp));
             temp.clear();
         }
     }
-    v.push_back(stoi(temp));
     
-    sort(v.begin(),v.end());
-    answer+=to_string(v.front())+' '+to_string(v.back());
+    if(!temp.empty())
+    {
+        sortInt.push_back(stoi(temp));
+    }
     
+    sort(sortInt.begin(), sortInt.end());
+    answer += to_string(sortInt.front()) + " " + to_string(sortInt.back());
     return answer;
 }
