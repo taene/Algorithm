@@ -1,6 +1,5 @@
 #include <iostream>
 #include <map>
-#include <vector>
 #include <algorithm>
 
 using namespace std;
@@ -12,7 +11,6 @@ int main(int argc, char* argv[])
     cout.tie(NULL);
 
     map<string, int> mp;
-    vector<string> v;
     int n;
     cin >> n;
     for (int i = 0; i < n; i++)
@@ -29,17 +27,12 @@ int main(int argc, char* argv[])
         }
     }
 
-    for (auto temp : mp)
+    for (auto it = mp.rbegin(); it != mp.rend(); ++it)
     {
-        if (temp.second)
+        if (it->second)
         {
-            v.push_back(temp.first);
+            cout << it->first << '\n';
         }
-    }
-    sort(v.begin(), v.end(), greater<string>());
-    for (auto temp : v)
-    {
-        cout << temp << '\n';
     }
 
     return 0;
