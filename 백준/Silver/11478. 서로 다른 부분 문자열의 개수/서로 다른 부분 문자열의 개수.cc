@@ -1,5 +1,5 @@
 #include <iostream>
-#include <map>
+#include <set>
 
 using namespace std;
 
@@ -10,22 +10,17 @@ int main(int argc, char* argv[])
     cout.tie(NULL);
 
     string s;
-    map<string, int> mp;
+    set<string> st;
     cin >> s;
     for (size_t i = 0; i < s.size(); ++i)
     {
-        for (size_t j = i; j < s.size(); ++j)
+        for (size_t len = 1; len <= s.size() - i; ++len)
         {
-            string temp = s.substr(i, s.size() - j);
-            mp[temp]++;
+            string temp = s.substr(i, len);
+            st.insert(temp);
         }
     }
-    int cnt = 0;
-    for (auto it = mp.begin(); it != mp.end(); ++it)
-    {
-        cnt++;
-    }
-    cout << cnt;
+    cout<<st.size();
 
     return 0;
 }
