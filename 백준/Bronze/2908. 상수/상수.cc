@@ -1,4 +1,5 @@
 #include <iostream>
+#include <algorithm>
 
 using namespace std;
 
@@ -10,23 +11,17 @@ int main(int argc, char* argv[])
 
     string a, b;
     cin >> a >> b;
-    string retA, retB;
-    for (auto it = a.rbegin(); it != a.rend(); ++it)
-    {
-        retA += *it;
-    }
-    for (auto it = b.rbegin(); it != b.rend(); ++it)
-    {
-        retB += *it;
-    }
+
+    reverse(a.begin(),a.end());
+    reverse(b.begin(), b.end());
     
-    if (retA >= retB)
+    if (a >= b)
     {
-        cout << retA;
+        cout << a;
     }
     else
     {
-        cout << retB;
+        cout << b;
     }
 
     return 0;
