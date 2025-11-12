@@ -1,39 +1,42 @@
 #include <iostream>
-#include <string>
 #include <vector>
+
 using namespace std;
 
-int main()
+
+int main(int argc, char* argv[])
 {
-	int N, M;	//N은 카드의 개수, M은 고른 카드의 합
-	cin >> N >> M;
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
 
-	int p;
-	vector<int> card;	//카드에 쓰여있는 수들
-	int sum;	//3개의 카드들의 합
+    int n, m;
+    cin >> n >> m;
 
-	int max = 0;
+    vector<int> arr;
+    for (int i = 0; i < n; ++i)
+    {
+        int num;
+        cin >> num;
+        arr.push_back(num);
+    }
 
-	for (int i = 0; i < N; i++)
-	{
-		cin >> p;
-		card.push_back(p);
-	}
+    int ret = 0;
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = i + 1; j < n; j++)
+        {
+            for (int k = j + 1; k < n; k++)
+            {
+                int temp = arr[i] + arr[j] + arr[k];
+                if (temp <= m)
+                {
+                    ret = max(ret, temp);
+                }
+            }
+        }
+    }
+    cout << ret;
 
-	for (int i = 0; i < card.size(); i++)
-	{
-		for (int j = i + 1; j < card.size(); j++)
-		{
-			for (int k = j + 1; k < card.size(); k++)
-			{
-				sum = card[i] + card[j] + card[k];
-				if (sum <= M && max < sum)
-				{
-					max = sum;
-
-				}
-			}
-		}
-	}
-	cout << max;
+    return 0;
 }
