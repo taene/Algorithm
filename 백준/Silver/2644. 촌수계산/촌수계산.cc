@@ -1,6 +1,5 @@
 #include <iostream>
 #include <vector>
-#include <algorithm>
 
 using namespace std;
 
@@ -12,6 +11,7 @@ int mn = -1;
 void dfs(int here, int cnt)
 {
     visited[here] = true;
+
     if (here == b)
     {
         if (mn == -1 || cnt < mn)
@@ -28,6 +28,8 @@ void dfs(int here, int cnt)
             dfs(i, cnt + 1);
         }
     }
+
+    visited[here] = false;
 }
 
 int main()
@@ -47,6 +49,7 @@ int main()
         v[x].push_back(y);
         v[y].push_back(x);
     }
+    
     dfs(a, 0);
     cout << mn;
 
