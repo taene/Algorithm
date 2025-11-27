@@ -3,8 +3,9 @@
 using namespace std;
 
 int n, m;
-char arr[100][100];
+int arr[100][100];
 bool visited[100][100];
+int cnt[100][100];
 int dy[4] = {-1, 0, 1, 0};
 int dx[4] = {0, 1, 0, -1};
 int ret;
@@ -19,17 +20,12 @@ void dfs(int y, int x)
         int nx = x + dx[i];
 
         if (ny < 0 || nx < 0 || ny >= n || nx >= m) continue;
-        if (arr[ny][nx] == '1' && !visited[ny][nx])
+        if (arr[ny][nx] == 1)
         {
-            visited[ny][nx] = true;
+            cnt[ny][nx]++;
             continue;
         }
-        if (arr[ny][nx] == '1' && visited[ny][nx])
-        {
-            arr[ny][nx] = 'c';
-            continue;
-        }
-        if (arr[ny][nx] == '0' && !visited[ny][nx])
+        if (arr[ny][nx] == 0 && !visited[ny][nx])
             dfs(ny, nx);
     }
 }
@@ -45,9 +41,7 @@ int main()
     {
         for (int j = 0; j < m; ++j)
         {
-            char temp;
-            cin >> temp;
-            arr[i][j] = temp;
+            cin >> arr[i][j];
         }
     }
 
@@ -55,6 +49,7 @@ int main()
     {
         bool flag = false;
         fill(&visited[0][0], &visited[0][0] + 100 * 100, false);
+        fill(&cnt[0][0], &cnt[0][0] + 100 * 100, 0);
 
         dfs(0, 0);
 
@@ -62,9 +57,9 @@ int main()
         {
             for (int j = 0; j < m; ++j)
             {
-                if (arr[i][j] == 'c')
+                if (arr[i][j] == 1 && cnt[i][j] >= 2)
                 {
-                    arr[i][j] = '0';
+                    arr[i][j] = 0;
                     flag = true;
                 }
             }
@@ -72,8 +67,8 @@ int main()
 
         if (!flag)
             break;
-        else
-            ret++;
+
+        ret++;
     }
     cout << ret;
 
