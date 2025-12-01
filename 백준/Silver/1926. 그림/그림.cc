@@ -1,28 +1,40 @@
 #include <iostream>
+#include <vector>
+#include <queue>
 
 using namespace std;
 
 int n, m;
-int arr[500][500];
-bool visited[500][500];
+int arr[504][504];
+int visited[504][504];
+queue<pair<int, int>> q;
 int dy[4] = {-1, 0, 1, 0};
 int dx[4] = {0, 1, 0, -1};
 int cnt, mx;
 
-int dfs(int y, int x)
+int bfs(int y, int x)
 {
+    q.push({y, x});
+    visited[y][x] = 1;
     int token = 1;
-    visited[y][x] = true;
 
-    for (int i = 0; i < 4; ++i)
+    while (q.size())
     {
-        int ny = y + dy[i];
-        int nx = x + dx[i];
+        pair<int, int> here = q.front();
+        q.pop();
 
-        if (ny < 0 || nx < 0 || ny >= n || nx >= m) continue;
-        if (visited[ny][nx] == true || arr[ny][nx] == 0) continue;
+        for (int i = 0; i < 4; ++i)
+        {
+            int ny = here.first + dy[i];
+            int nx = here.second + dx[i];
 
-        token += dfs(ny, nx);
+            if (ny < 0 || nx < 0 || ny >= n || nx >= m) continue;
+            if (visited[ny][nx] || !arr[ny][nx]) continue;
+
+            q.push({ny, nx});
+            visited[ny][nx] = visited[here.first][here.second] + 1;
+            token++;
+        }
     }
 
     return token;
@@ -33,15 +45,13 @@ int main()
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     cout.tie(NULL);
-
+    
     cin >> n >> m;
     for (int i = 0; i < n; ++i)
     {
         for (int j = 0; j < m; ++j)
         {
-            int temp;
-            cin >> temp;
-            arr[i][j] = temp;
+            cin >> arr[i][j];
         }
     }
 
@@ -49,14 +59,13 @@ int main()
     {
         for (int j = 0; j < m; ++j)
         {
-            if (visited[i][j] == false && arr[i][j] == 1)
+            if (!visited[i][j] && arr[i][j])
             {
                 cnt++;
-                mx = max(mx, dfs(i, j));
+                mx = max(mx, bfs(i, j));
             }
         }
     }
-
     cout << cnt << '\n' << mx;
 
     return 0;
