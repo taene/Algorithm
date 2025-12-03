@@ -1,28 +1,45 @@
 #include <iostream>
+#include <vector>
+#include <queue>
 
 using namespace std;
 
-int n, m, k;
-int arr[100][100];
-bool visited[100][100];
+int n, m, k, ret;
+int arr[104][104];
+int visited[104][104];
 int dy[4] = {-1, 0, 1, 0};
 int dx[4] = {0, 1, 0, -1};
-int ret;
 
-int dfs(int y, int x)
+struct T
 {
+    int x;
+    int y;
+};
+
+int bfs(int sy, int sx)
+{
+    queue<T> q;
+
+    q.push({sy, sx});
+    visited[sy][sx] = 1;
     int token = 1;
-    visited[y][x] = true;
 
-    for (int i = 0; i < 4; ++i)
+    while (q.size())
     {
-        int ny = y + dy[i];
-        int nx = x + dx[i];
+        T here = q.front();
+        q.pop();
 
-        if (ny < 0 || nx < 0 || ny >= n || nx >= m) continue;
-        if (visited[ny][nx] || arr[ny][nx] == 0) continue;
+        for (int i = 0; i < 4; ++i)
+        {
+            T next = {here.y + dy[i], here.x + dx[i]};
 
-        token += dfs(ny, nx);
+            if (next.x < 0 || next.y < 0 || next.y >= n || next.x >= m) continue;
+            if (visited[next.y][next.x] || !arr[next.y][next.x]) continue;
+
+            q.push({next.y, next.x});
+            visited[next.y][next.x] = visited[here.y][here.x] + 1;
+            token++;
+        }
     }
 
     return token;
@@ -37,18 +54,18 @@ int main()
     cin >> n >> m >> k;
     for (int i = 0; i < k; ++i)
     {
-        int y, x;
-        cin >> y >> x;
-        arr[y - 1][x - 1] = 1;
+        int r, c;
+        cin >> r >> c;
+        arr[r - 1][c - 1] = 1;
     }
 
     for (int i = 0; i < n; ++i)
     {
         for (int j = 0; j < m; ++j)
         {
-            if (visited[i][j] == false && arr[i][j] == 1)
+            if (!visited[i][j] && arr[i][j])
             {
-                ret = max(ret, dfs(i, j));
+                ret = max(ret, bfs(i, j));
             }
         }
     }
