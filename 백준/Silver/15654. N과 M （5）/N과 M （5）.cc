@@ -5,7 +5,7 @@
 using namespace std;
 
 int n, m;
-bool visited[10004];
+bool visited[10];
 vector<int> v1;
 vector<int> v2;
 
@@ -21,12 +21,12 @@ void dfs()
         return;
     }
 
-    for (auto i : v1)
+    for (int i = 0; i < n; ++i)
     {
         if (!visited[i])
         {
             visited[i] = true;
-            v2.push_back(i);
+            v2.push_back(v1[i]);
             dfs();
             v2.pop_back();
             visited[i] = false;
