@@ -12,12 +12,6 @@ vector<int> ret;
 
 void dfs()
 {
-    for (auto i : ret)
-    {
-        if (weight < 500)
-            return;
-    }
-
     if (ret.size() == n)
     {
         cnt++;
@@ -31,7 +25,10 @@ void dfs()
             visited[i] = true;
             ret.push_back(v[i]);
             weight += (v[i] - k);
-            dfs();
+            if (weight >= 500)
+            {
+                dfs();
+            }
             weight -= (v[i] - k);
             ret.pop_back();
             visited[i] = false;
