@@ -10,14 +10,14 @@ bool visited[26];
 int dy[4] = {-1, 0, 1, 0};
 int dx[4] = {0, 1, 0, -1};
 
-void dfs(int y, int x, int cnt)
+void dfs(int sy, int sx, int cnt)
 {
     ret = max(ret, cnt);
 
     for (int i = 0; i < 4; ++i)
     {
-        int ny = y + dy[i];
-        int nx = x + dx[i];
+        int ny = sy + dy[i];
+        int nx = sx + dx[i];
 
         if (ny < 0 || nx < 0 || ny >= R || nx >= C) continue;
         if (visited[arr[ny][nx] - 'A']) continue;
@@ -42,6 +42,7 @@ int main()
             cin >> arr[i][j];
         }
     }
+
     visited[arr[0][0] - 'A'] = true;
     dfs(0, 0, 1);
     cout << ret;
