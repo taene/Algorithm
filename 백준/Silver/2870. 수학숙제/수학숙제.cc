@@ -1,65 +1,65 @@
 #include <iostream>
 #include <vector>
-#include <string>
 #include <algorithm>
+#include <string>
 using namespace std;
-
-int n;
-string buf, temp;
-vector<string> ret;
-
-void deleteZero()
-{
-	while (temp.size() && temp.front() == '0')
-	{
-		temp.erase(temp.begin());
-	}
-
-	if (temp.empty())
-		temp = "0";
-
-	ret.push_back(temp);
-	temp = "";
-}
 
 bool cmp(string a, string b)
 {
-	if (a.size() == b.size())
-		return a < b;
-	else
-		return a.size() < b.size();
+    if(a.size()==b.size())
+        return a<b;
+    return a.size()<b.size();
+}
+
+string cutZero(string s)
+{
+    size_t noZeroIdx = s.find_first_not_of('0');
+    if(noZeroIdx == string::npos)
+    {
+        return "0";
+    }
+    return s.substr(noZeroIdx);
 }
 
 int main()
 {
-	ios::sync_with_stdio(false);
-	cin.tie(0);
-	cout.tie(0);
+    int N;
+    cin>>N;
+    vector<string> v;
+    
+    for(int i=0; i<N; ++i)
+    {
+        string s;
+        cin>>s;
+        
+        string temp="";
+        for(int i=0; i<s.size(); ++i)
+        {
+            if(s[i]>='0' && s[i]<='9')
+            {
+                temp+=s[i];
+            }
+            else
+            {
+                if(temp.size())
+                {
+                    v.push_back(cutZero(temp));
+                }
+                temp="";
+            }
+        }
+        
+        if(temp.size())
+        {
+            v.push_back(cutZero(temp));
+        }
+    }
 
-	cin >> n;
-	while (n--)
-	{
-		cin >> buf;
-
-		for (int i = 0; i < buf.length(); i++)
-		{
-			if (buf[i] >= '0' && buf[i] <= '9')
-			{
-				temp += buf[i];
-			}
-			else if (temp.size())
-			{
-				deleteZero();
-			}
-		}
-
-		if (temp.size())
-			deleteZero();
-	}
-
-	sort(ret.begin(), ret.end(), cmp);
-	for (string it : ret)
-		cout << it << '\n';
-
-	return 0;
+    sort(v.begin(), v.end(), cmp);
+    for(string it:v)
+    {
+        cout<<it<<'\n';
+    }
+    
+    return 0;
 }
