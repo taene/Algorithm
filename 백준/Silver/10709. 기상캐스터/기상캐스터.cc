@@ -1,54 +1,44 @@
 #include <iostream>
 using namespace std;
 
-int h, w, k;
-char temp[100][100];
-int ret[100][100];
-bool check = false;
+int H,W;
+int arr[101][101];
 
 int main()
 {
-	ios::sync_with_stdio(false);
-	cin.tie(0);
-	cout.tie(0);
-
-	cin >> h >> w;
-	fill(&ret[0][0], &ret[0][0] + 100 * 100, -1);
-	for (int i = 0; i < h; i++)
-	{
-		for (int j = 0; j < w; j++)
-		{
-			cin >> temp[i][j];
-			if (temp[i][j] == 'c')
-				ret[i][j] = 0;
-		}
-	}
-
-	for (int i = 0; i < h; i++)
-	{
-		check = false;
-		for (int j = 0; j < w; j++)
-		{
-			if (temp[i][j] == 'c')
-			{
-				check = true;
-				k = 0;
-			}
-			else if (check)
-			{
-				ret[i][j] = ++k;
-			}
-		}
-	}
-
-	for (int i = 0; i < h; i++)
-	{
-		for (int j = 0; j < w; j++)
-		{
-			cout << ret[i][j] << ' ';
-		}
-		cout << '\n';
-	}
-
-	return 0;
+    cin>>H>>W;
+    fill(&arr[0][0],&arr[100][101],-1);
+    for(int i=0; i<H; ++i)
+    {
+        int num=0;
+        for(int j=0; j<W; ++j)
+        {
+            char c;
+            cin>>c;
+            
+            if(c=='c')
+            {
+                num=0;
+                arr[i][j]=num++;
+            }
+            else
+            {
+                if(num)
+                    arr[i][j]=num++;
+                else
+                    arr[i][j]=-1;
+            }
+        }
+    }
+    
+    for(int i=0; i<H; ++i)
+    {
+        for(int j=0; j<W; ++j)
+        {
+            cout<<arr[i][j]<<' ';
+        }
+        cout<<'\n';
+    }
+    
+    return 0;
 }
