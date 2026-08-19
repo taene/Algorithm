@@ -53,7 +53,7 @@ int pick(int start, int toPick, int mx)
         if (visited1[ground[i].first][ground[i].second]) continue;
         visited1[ground[i].first][ground[i].second] = true;
         treasure.push_back(ground[i]);
-        mx = pick(start + 1, toPick + 1, mx);
+        mx = pick(i, toPick + 1, mx);
         treasure.pop_back();
         visited1[ground[i].first][ground[i].second] = false;
     }
