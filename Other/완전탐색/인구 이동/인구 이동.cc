@@ -25,7 +25,6 @@ void dfs(int y, int x)
         int diff = abs(a[y][x] - a[ny][nx]);
         if (diff < l || diff > r) continue;
 
-        visited[ny][nx] = true;
         dfs(ny, nx);
     }
 }
